@@ -1,0 +1,17 @@
+Lab #4 — Mini-CTF (Cat Leak)
+
+Task summary:
+An attacker could discover the value a user searched for by reading URL-encoded query strings. The challenge provides a sample URL and a percent-encoded Google search string. The flag format is cryptoCTF{...} with a regex validator: `^cryptoCTF{(?:\x6d\x65\x6f\x77){2}}$.
+
+Steps performed (concise):
+
+Percent-decoded the Google query string %62%36%63%63%62%34%65%63%65%35%34%35%34%64%63%61%65%35%31%37%37%38
+%62%33%65%32%33%39%65%62%63%32&rlz=1C5CHF to obtain b6ccb4ece5454dcae51778b3e239ebc2.
+
+Observed that this matches the concatenated p1crypt values in the example URL (b6ccb4ece5454dca + e51778b3e239ebc2).
+
+Interpreted the regex: \x6d\x65\x6f\x77 → ASCII bytes 6d 65 6f 77 → meow. The {2} means meow repeats twice → meowmeow.
+
+Constructed the final flag: cryptoCTF{meowmeow}.
+
+Final flag: cryptoCTF{meowmeow}
